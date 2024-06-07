@@ -1,0 +1,42 @@
+Key Steps:
+    1. Data Ingestion
+    2. Data Transformation
+    3. Model Trainer
+    4. Model Evaluation
+    5. Model Deployment
+
+- To begin with, we need to create a local and Github repository for the project
+
+- To create a separate environment for this project, such that:
+    - all the packages, dependencies, etc. are installed/mentioned in this folder itself
+    - everything required in this project is present in this folder itself, 
+    - and we can execute this project from this folder itself
+    - GOOD PRACTICE!
+
+    - Make sure you've "Anaconda" installed already
+        > WHY? we'll use `conda` for managing environments and packages
+    - execute the cmd: "conda create -p venv python==3.8 -y"
+    - then, activate this environment: "conda activate ./venv"
+
+    - now, connect the GitHub repo to this Local repo
+
+- now create a "setup.py" & "requirements.txt"
+    - "setup.py" 
+        -> Allows you to package your project, making it easy to distribute and install.
+        -> useful if you plan to share your project with others or deploy it to a production environment.
+        -> think of it as "package.json" in JS 
+        -> contains the metadata information of the project
+
+    - how will this "setup.py" find the packages?
+        - whenever "find_packages" suns, it will search for folders which have "__init__.py"
+        - whichever folder has this file (ex: "src"), it will consider it as a package and will BUILD it
+
+- IMP: we can EITHER 
+    > 1. run the "setup.py" directly.
+    OR 
+    > 2. when we run the "requirements.txt" (which is usually considered doing), we need the "setup.py" file to execute simultaneously as well, in-order to build packages"
+
+    - so, for "2.", we add a line "-e ." at the end of requirements.txt file, which will automatically trigger the "setup.py" file.
+
+- now, run "pip install -r requirements.txt"
+    -> if a "generic_ml_project.egg-info" folder is created.....SETUP.PY FILE WAS EXECUTED AS WELL!
