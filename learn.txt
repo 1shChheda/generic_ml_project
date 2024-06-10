@@ -40,3 +40,34 @@ Key Steps:
 
 - now, run "pip install -r requirements.txt"
     -> if a "generic_ml_project.egg-info" folder is created.....SETUP.PY FILE WAS EXECUTED AS WELL!
+
+Project Structure:
+    - now, create a "components" folder inside "src" folder
+        > don't forget to create "__init__.py" inside this "components" folder as well
+            > WHY?  so that components can be exported/imported to some other file location
+
+    - Data Ingestion:
+        > reading the dataset from a database OR any other file locations
+
+    - Data Transformation:
+        > to change categorical features to numerical features
+        > to handle "one hot encoding", "label encoding"
+
+    - Model Trainer:
+        > which types of model to use
+        > compute confusion matrix/r2 squared error, etc
+        > Model Pusher: create & push the "pickle" file into Cloud
+
+    - "Pipeline":
+        > Two types: "Training pipeline" & "Prediction pipeline"
+
+        > from the "training_pipeline.py" we'll try to trigger/call all the "components" (data ingestion, transformation, trainer, etc...)
+
+        > once the model is created, we'll use "prediction_pipeline.py" to use the model to predict on NEW DATA
+
+        > + "__init__.py" file
+
+    - now, within "src" folder,
+        - create "logger.py" for Logging, 
+        - create "exception.py" for Exception Handling, 
+        - & create "utils.py" for writing any common functions that will be used accross entire application

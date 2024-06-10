@@ -13,7 +13,7 @@ def get_requirements(file_path: str) -> List[str]:
         [req.replace('\n','') for req in requirements]
 
         if HYPHEN_E_DOT in requirements:
-            requirements.remove(HYPHEN_E_DOT)
+            requirements.remove(HYPHEN_E_DOT) # to remove the ".e -" when the setup.py is triggered, and the build is created
 
     return requirements
 
