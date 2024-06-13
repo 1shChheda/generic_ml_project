@@ -71,3 +71,52 @@ Project Structure:
         - create "logger.py" for Logging, 
         - create "exception.py" for Exception Handling, 
         - & create "utils.py" for writing any common functions that will be used accross entire application
+
+- Exploratory Data Analysis (EDA)
+    - prefer doing it in Jupyter Notebook (not in .py file)
+    - whenever perform EDA, OBSERVATION is SUPER IMP.
+    - provide that observation to the stakeholder
+    - for each step in project, have a Reason
+
+    - Steps:
+        1. Importing Libraries
+        2. Loading the Dataset
+        3. Understanding the Data
+        4. Data Cleaning
+        5. Data Visualization
+        6. Feature Engineering
+        7. Data Preprocessing for Machine Learning Models
+
+    - Detailed:
+        1. Importing Libraries
+            _> import numpy as np
+            _> import pandas as pd
+            _> import matplotlib.pyplot as plt
+            _> import seaborn as sns
+
+        2. Loading the Dataset
+            _> data = pd.read_csv('path_to_your_dataset.csv')
+
+        3. Understanding the Data
+            - View the first few rows:
+                _> data.head()
+
+            - Get a summary of the dataset:
+                _> data.info()
+                _> data.describe()
+
+            - Identify missing values:
+                _> data.isna().sum()
+
+        4. Data Cleaning
+            - Handling missing values: (removing them or filling them with a value)
+                _> data.dropna(inplace=True)  # To remove rows with missing values
+                _> data.fillna(value, inplace=True)  # To fill missing values
+
+            - Remove duplicate rows:
+                _> data.drop_duplicates(inplace=True)
+
+        5. Data Visualization
+            - Histogram: To view the distribution of a single feature
+                _> data['feature_name'].hist()
+                _> 

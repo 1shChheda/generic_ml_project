@@ -1,6 +1,7 @@
 import sys
-import logging
-from logger import LOG_FILE_PATH
+# from logger import logging
+# import time
+# from datetime import datetime
 
 # whenever an exception gets raised, I want to push this on like my own custom message
 def error_message_detail(error, error_detail: sys):
@@ -24,11 +25,23 @@ class CustomException(Exception):
     
 # So, whenever you use "try...catch" -> inside the catch block just raise CustomException to use this!
 
-# to test the logger
-if __name__== "__main__":
 
-    try:
-        a = 1/0
-    except Exception as e:
-        logging.error("Divide by Zero")
-        raise CustomException(e, sys)
+# to test the logger (at timestamp intervals)
+# def log_at_intervals():
+#     messages = [
+#         "Starting the test logging process",
+#         "This is the first log message",
+#         "This is the second log message",
+#         "This is the third log message",
+#         "This is the fourth log message",
+#         "This is the fifth log message",
+#         "Ending the test logging process"
+#     ]
+
+#     for message in messages:
+#         logging.info(message)
+#         time.sleep(5) # to wait for 5 seconds before logging the next message
+
+
+# if __name__ == "__main__":
+#     log_at_intervals()
