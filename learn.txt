@@ -119,4 +119,36 @@ Project Structure:
         5. Data Visualization
             - Histogram: To view the distribution of a single feature
                 _> data['feature_name'].hist()
-                _> 
+                _> sns.boxplot(x='feature_name', data=data)
+                _> plt.scatter(data['feature1'], data['feature2'])
+                _> sns.heatmap(data.corr(), annot=True)
+
+- Model Training
+    - Select One feature of the dataset to be "predicted", based on the rest of the features (used as "inputs")
+
+    - Feature Engineering:
+        > When there are 'less no. of features & also less no. of categories inside the features' -> use "One-Hot Encoding"
+
+        > Suppose a feature had "many more no. of categories" -> use "Target Guided Ordinal Encoding"
+
+        > Once the categorical features are converted into numerical features, we perform "Standardization or normalization
+
+    - Feature Scaling:
+        > Standardize or normalize features -> using "sklearn.preprocessing"
+
+        > NOTE: Only Numerical Features need to be Normalized
+            & Categorical Features need to be "Encoded" into numerical form (NO NEED TO NORMALIZE AFTER THAT)
+
+    - Train_Test_Split:
+        > split the X,y data into training/testing dataset (80/20 ratio or anything suitable)
+
+    - Select a Model that gives the best results
+
+    - Train the model (initialize + fit + predict) on the train/test data
+
+    - Evaluate the model (calculate "evaluation metrics")
+
+
+
+
+
