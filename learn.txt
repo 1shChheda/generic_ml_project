@@ -148,7 +148,66 @@ Project Structure:
 
     - Evaluate the model (calculate "evaluation metrics")
 
+- Modular Coding 
+    - use of ".py" files INSTEAD OF ".ipynb" files
+    - first we'll read data from local dataset
+    - then, as we proceed, we will read the data from databases
+
+    - Data Ingestion:
+        > to read the data and split it into train/test
+
+        > whenever we perform, we require some "inputs"
+            > where to save training path/train data
+            > where to save test data
+            > where to save raw data
+
+        > These inputs we'll be creating in another "class" -> "DataIngestionConfig"
+            > We can define this class in another folder "config" (but to keep it simple, let it be)
+
+            > IMP: RECOMMENDED: use "@dataclass" when only to define variables,
+                if you want to define functions too, use normal Class (with __init__ function)
+                    -> ex: "DataIngestion"
+
+            
+    - Data Transformation:
+        > to perform Feature Engineering, Data Cleaning
+            > convert categorical feat. to numerical form
+
+        
+        > Key Components:
+
+            1. Numerical Pipeline:
+            - SimpleImputer(strategy="median"): Fills missing numerical values with the median.
+            - StandardScaler(): Standardizes numerical features by removing the mean and scaling to unit variance.
+
+            2. Categorical Pipeline:
+            - SimpleImputer(strategy="most_frequent"): Fills missing categorical values with the most frequent value.
+            - OneHotEncoder(): Converts categorical features into one-hot encoded format.
+            - StandardScaler(with_mean=False): Scales one-hot encoded features (mean=False is used for sparse matrices).
+
+            3. ColumnTransformer:
+            - Combines the numerical and categorical pipelines, applying them to respective feature subsets.
+
+        
+        > PROCESS:
+            1. Define Pipelines:
+            - Create numerical and categorical pipelines using `Pipeline`.
+
+            2. Combine Pipelines:
+            - Use `ColumnTransformer` to combine numerical and categorical pipelines.
+
+            3. Fit and Transform:
+            - "fit_transform" (training data): 
+                - Fits the transformer (learns parameters: mean, std deviation, encoding categories).
+                - Transforms the data based on learned parameters.
+            - "transform" (test data): 
+                - Transforms the test data using parameters learned from training data.
+
+            4. Combine Transformed Data with Target:
+            - Use `np.c_` to concatenate transformed input features with the target feature.
 
 
-
+        > IMP NOTE:
+            - "fit_transform": Used only on training data to learn and apply transformations.
+            - "transform": Used on test data to apply learned transformations from the training data.
 
