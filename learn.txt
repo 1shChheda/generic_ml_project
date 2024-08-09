@@ -191,10 +191,10 @@ Project Structure:
         
         > PROCESS:
             1. Define Pipelines:
-            - Create numerical and categorical pipelines using `Pipeline`.
+            - Create numerical and categorical pipelines using 'Pipeline'.
 
             2. Combine Pipelines:
-            - Use `ColumnTransformer` to combine numerical and categorical pipelines.
+            - Use 'ColumnTransformer' to combine numerical and categorical pipelines.
 
             3. Fit and Transform:
             - "fit_transform" (training data): 
@@ -204,10 +204,52 @@ Project Structure:
                 - Transforms the test data using parameters learned from training data.
 
             4. Combine Transformed Data with Target:
-            - Use `np.c_` to concatenate transformed input features with the target feature.
+            - Use 'np.c_' to concatenate transformed input features with the target feature.
 
 
         > IMP NOTE:
             - "fit_transform": Used only on training data to learn and apply transformations.
             - "transform": Used on test data to apply learned transformations from the training data.
 
+    - Model Trainer:
+        > to train and evaluate various regression models, and save the best model.
+
+        > Implementation:
+            - "ModelTrainerConfig" class: Defines path to save the trained model using '@dataclass'.
+            - "ModelTrainer" class:
+                - "initiate_model_trainer" method:
+                    - split processed dataset into input features (X) and target (y) for both train and test sets.
+                    - define a dictionary of regression models to train.
+                    - evaluates models using a custom 'evaluate_model' function.
+                    - select the best model based on performance metrics.
+                    - save the best model using 'save_obj'.
+                    - predict on test data and calculates R² score to evaluate model performance.
+            
+    - Overall Workflow:
+        > Data Ingestion: Splits the dataset into training and testing sets (input + target).
+
+        > Data Transformation: 
+            - Processes input features (numeric + categorical) using defined pipelines.
+            - Concatenates processed input features with target feature to form 'train_arr' & 'test_arr'.
+
+        > Model Training:
+            - Accesses the full processed dataset.
+            - Trains and evaluates multiple models.
+            - Saves the best performing model.
+
+    - HYPERPARAMETER TUNING:
+        > control the learning process of a ML model.
+        > set before the training process of a model begins.
+        > NOTE: they control the learning process itself, rather than being learned from the data.
+            - ex: learning rate, no. of neurons in a NeuralNet, kernel size in SNM
+
+        > they are different from "model params" (weights, bias, etc.)
+        > Each type of ML model has its own set of HyperParams to tune
+        > ex: C, kernel, gamma -> SVM
+        > ex: alpha -> Lasso
+
+        > To Implement:
+            - basically just make a list of params + their value range (for each model)
+            - feed this into GridSearchCV fn. & it'll give the best_params_
+            - use "model.set_params()" to set the resulting best params into the model
+            - & then "model.fit()" & so on....

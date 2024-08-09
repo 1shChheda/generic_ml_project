@@ -5,6 +5,7 @@ from src.exception import CustomException
 from src.logger import logging
 
 from src.components.data_transformation import DataTransformation, DataTransformationConfig
+from src.components.model_trainer import ModelTrainer, ModelTrainerConfig
 
 # for working with data
 import pandas as pd
@@ -32,7 +33,7 @@ class DataIngestion:
             # to create the training_data folder/file
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)
 
-            df.to_csv(self.ingestion_config.raw_data_path, index=False, header=True)
+            df.to_csv(self.ingestion_config.raw_data_path, index=False, header=True) # to export a DataFrame to a CSV
 
             logging.info("train test split initialized")
             train_set, test_set = train_test_split(df, test_size=0.2, random_state=42)
@@ -55,4 +56,10 @@ if __name__=="__main__":
     train_data, test_data=obj.initiate_data_ingestion()
 
     data_transformation=DataTransformation()
-    data_transformation.initiate_data_transformation(train_data, test_data)
+    train_arr, test_arr,_ = data_transformation.initiate_data_transformation(train_data, test_data)
+
+    model_trainer = ModelTrainer()
+
+    prediction = model_trainer.initiate_model_trainer(train_arr, test_arr)
+
+    print(f"Prediction Score: {prediction}")
